@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class ListingController extends Controller
 {
     //
-
     public function index()
     {
         $listings = Listing::all();

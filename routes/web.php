@@ -25,4 +25,4 @@ Route::get('/test-api', function () {
 });
 
 // Index Route 
-Route::get("/index", [ListingController::class, "index"])->name("index");
+Route::get("/jobs/index", [ListingController::class, "index"])->name("index");
