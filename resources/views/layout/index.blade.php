@@ -1,5 +1,8 @@
-<?php
-
-foreach ($listings as $key => $job) {
-    echo $job . "<br>";
-}
+{{-- Indexing Listings --}}
+<x-layout>
+    <ul>
+    @foreach ($listings as $listing)
+        <li>{{ $listing }}</li>
+    @endforeach
+    </ul>
+</x-layout>
