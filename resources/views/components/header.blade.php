@@ -5,28 +5,13 @@
             <a href="{{ url('/') }}">Workopia</a>
         </h1>
         <nav class="hidden md:flex items-center space-x-4">
-            <a href="{{ url('/jobs/index') }}" class="text-white hover:underline py-2 {{ request()->is('jobs/index') ? 'font-bold text-yellow-500' : '' }}"
-                >All Jobs</a
-            >
-            <a
-                href="{{ url('/jobs/saved') }}"
-                class="text-white hover:underline py-2 {{ request()->is('jobs/saved') ? 'font-bold text-yellow-500' : '' }}"
-                >Saved Jobs</a
-            >
-            <a href="{{ url('/login') }}" class="text-white hover:underline py-2 {{ request()->is('login') ? 'font-bold text-yellow-500' : '' }}"
-                >Login</a
-            >
-            <a
-                href="{{ url('/register') }}"
-                class="text-white hover:underline py-2 {{ request()->is('register') ? 'font-bold text-yellow-500' : '' }}"
-                >Register</a
-            >
-            <a
-                href="{{ url('/dashboard') }} {{ request()->is('dashboard') ? 'font-bold text-yellow-500' : '' }}"
-                class="hover:underline py-2"
-            >
-                <i class="fa fa-gauge mr-1"></i> Dashboard
-            </a>
+            {{-- Used NavLink Component --}}
+            <x-nav-link url="/" :active="request()->is('/')">Home</x-nav-link>
+            <x-nav-link url="/jobs/index" :active="request()->is('jobs/index')">All Jobs</x-nav-link>
+            <x-nav-link url="/jobs/saved" :active="request()->is('jobs/saved')">Saved Jobs</x-nav-link>
+            <x-nav-link icon="user" url="/login" :active="request()->is('login')">Login</x-nav-link>
+            <x-nav-link url="/register" :active="request()->is('register')">Register</x-nav-link>
+            <x-nav-link url="/dashboard" :active="request()->is('dashboard')"><i class="fa fa-gauge mr-1"></i> Dashboard</x-nav-link>
             <a
                 href="{{ url('/jobs/create') }}"
                 class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded hover:shadow-md transition duration-300"
