@@ -1,12 +1,15 @@
 <!-- Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less. - Marie Curie -->
 @props([
-    'url' => '/jobs/create',
-    'class' => 'bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded hover:shadow-md transition duration-300',
+    'url' => '/',
+    'class' => '',
+    'hover' => '',
     'icon' => null
 ])
 
-<a href="{{ $url }}" class="{{ $class }}">
+<a href="{{ $url }}" class="{{ $class }} {{ $hover }}">
+    {{-- If Icon Exist --}}
     @if ($icon)
-    <i class="fa fa-{{ $icon }}"></i> Create Job
+        <i class="fa fa-{{ $icon }}"></i> 
     @endif
+    {{ $slot }}
 </a>
