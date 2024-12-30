@@ -3,10 +3,11 @@
     'url' => '/',
     'class' => '',
     'hover' => '',
-    'icon' => null
+    'icon' => null,
+    'block' => false,
 ])
 
-<a href="{{ $url }}" class="{{ $class }} {{ $hover }}">
+<a href="{{ $url }}" class="{{ $class }} {{ $hover }} {{ $block ? 'block' : '' }}">
     {{-- If Icon Exist --}}
     @if ($icon)
         <i class="fa fa-{{ $icon }}"></i> 
