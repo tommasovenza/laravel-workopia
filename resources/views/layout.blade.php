@@ -23,6 +23,7 @@
     <x-header />
     @if (request()->is('/'))
         <x-hero />
+        <x-top-banner />
     @endif
     {{-- Main --}}
     <main class="container mx-auto p-4 mt-4">
