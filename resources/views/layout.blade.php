@@ -12,6 +12,8 @@
         integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" 
     />
+    {{-- Custom CSS Includes--}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {{-- Vite --}}
     @vite('resources/css/app.css')
     <title>Laravel Workopia</title>
@@ -19,11 +21,14 @@
 <body>
     {{-- Header Component --}}
     <x-header />
+    @if (request()->is('/'))
+        <x-hero />
+    @endif
     {{-- Main --}}
     <main class="container mx-auto p-4 mt-4">
         {{ $slot }}
     </main>
-
+    {{-- Custom JS Includes --}}
     <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
