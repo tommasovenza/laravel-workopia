@@ -9,8 +9,26 @@ class Listing extends Model
 {
     use HasFactory;
 
+    protected $table = "job_listings";
+
     protected $fillable = [
-        "job_title",
-        "job_description",
+        "user_id",
+        "title",
+        "description",
+        "salary",
+        "job_type",
+        "remote",
+        "requirements",
+        "benefits",
+        "address",
+        "city",
+        "state",
+        "zipcode",
+        "contact_email",
+        "contact_phone",
+        "company_name",
+        "company_description",
+        "company_logo",
+        "company_website",
     ];
 }
