@@ -1,8 +1,8 @@
 {{-- Indexing Listings --}}
 <x-layout>
-    <ul>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
     @foreach ($listings as $listing)
-        <li>{{ $listing }}</li>
+        <x-job-card :job="$listing"></x-job-card>
     @endforeach
-    </ul>
+    </div>
 </x-layout>
