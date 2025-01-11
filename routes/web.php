@@ -3,9 +3,7 @@
 use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('layout.home');
-});
+Route::get('/', [ListingController::class, 'show_home']);
 
 Route::get('/test', function () {
     return "Hello World!";

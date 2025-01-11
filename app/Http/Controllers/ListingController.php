@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
+
+    // Return Home View
+    public function show_home()
+    {
+        $jobs = Listing::all();
+        return view('layout.home', compact('jobs'));
+    }
+
     // Indexing Jobs
     public function index()
     {

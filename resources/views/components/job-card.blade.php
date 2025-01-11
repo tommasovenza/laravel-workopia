@@ -1,6 +1,6 @@
 @props(['job'])
 
-<div class="rounded-lg shadow-md bg-white p-4">
+<div class="rounded-lg shadow-md bg-white p-4 mb-4">
     <div class="flex items-center space-between gap-4">
         <img
             src="/images/{{ $job->company_logo }}"
