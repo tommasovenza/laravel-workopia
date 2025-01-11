@@ -32,8 +32,8 @@ class ListingController extends Controller
     // Show Single Jobs
     public function show($id)
     {
-        $listing = Listing::find($id);
+        $job = Listing::find($id);
 
-        return view('layout.show', compact('listing'));
+        return view('layout.show', compact('job'));
     }
 }
