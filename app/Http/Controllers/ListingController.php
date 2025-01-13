@@ -29,6 +29,27 @@ class ListingController extends Controller
         return view('layout.create');
     }
 
+    // Store => make validation and store a new job into DB
+    public function store(Request $request)
+    {
+        $validated_data = $request->validate([
+            'title' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zipcode' => 'required',
+            'company_name' => 'required',
+            'company_website' => 'required',
+            'company_phone' => 'required',
+        ]);
+
+        if ($validated_data) {
+            dd('ok');
+        } else {
+            dd('not validated');
+        }
+    }
+
     // Show Single Jobs
     public function show($id)
     {

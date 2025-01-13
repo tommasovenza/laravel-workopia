@@ -3,7 +3,8 @@
     <h2 class="text-4xl text-center font-bold mb-4">
         Create Job Listing
     </h2>
-    <form method="POST" action="/jobs" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('store')}}" enctype="multipart/form-data">
+        @csrf
         {{-- Heading --}}
         <h2 class="text-2xl font-bold mb-6 text-center text-gray-500">
             Job Info
@@ -63,18 +64,8 @@
             ></textarea>
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700" for="tags"
-                >Tags (comma-separated)</label
-            >
-            <input
-                id="tags"
-                type="text"
-                name="tags"
-                class="w-full px-4 py-2 border rounded focus:outline-none"
-                placeholder="development,coding,java,python"
-            />
-        </div>
+        {{-- Job Title Input Text --}}
+        <x-text id="tags" name="tags" value="Tags (comma-separated)" placeholder="development,coding,java,python" />
 
         <div class="mb-4">
             <label class="block text-gray-700" for="job_type"
@@ -175,10 +166,7 @@
             />
         </div>
 
-        <button
-            type="submit"
-            class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none"
-        >
+        <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">
             Save
         </button>
     </form>
