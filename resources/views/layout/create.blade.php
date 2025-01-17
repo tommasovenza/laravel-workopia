@@ -26,40 +26,11 @@
         {{-- Job Title Input Text --}}
         <x-inputs.text id="tags" name="tags" label="Tags (comma-separated)" placeholder="development,coding,java,python" />
 
-        <div class="mb-4">
-            <label class="block text-gray-700" for="job_type"
-                >Job Type</label
-            >
-            <select
-                id="job_type"
-                name="job_type"
-                class="w-full px-4 py-2 border rounded focus:outline-none"
-            >
-                <option value="Full-Time" selected>
-                    Full-Time
-                </option>
-                <option value="Part-Time">Part-Time</option>
-                <option value="Contract">Contract</option>
-                <option value="Temporary">Temporary</option>
-                <option value="Internship">Internship</option>
-                <option value="Volunteer">Volunteer</option>
-                <option value="On-Call">On-Call</option>
-            </select>
-        </div>
-
-        <div class="mb-4">
-            <label class="block text-gray-700" for="remote"
-                >Remote</label
-            >
-            <select
-                id="remote"
-                name="remote"
-                class="w-full px-4 py-2 border rounded focus:outline-none"
-            >
-                <option value="false">No</option>
-                <option value="true">Yes</option>
-            </select>
-        </div>
+        {{-- Job Type Select Input --}}
+        <x-inputs.select id="job_type" name="job_type" label="Job Type" :options="['Full-Time' => 'Full-Time', 'Part-Time' => 'Part-Time', 'Contract' => 'Contract', 'Temporary' => 'Temporary', 'Internship' => 'Internship', 'Volunteer' => 'Volunteer', 'On-Call' => 'On-Call']" />
+        
+        {{-- Remote Select Input --}}
+        <x-inputs.select id="remote" name="remote" label="Remote" :options="['false' => 'No', 'true' => 'Yes']" />
 
         {{-- Address Input Text --}}
         <x-inputs.text id="address" name="address" label="Address" placeholder="123 Main St" />
@@ -93,18 +64,6 @@
 
         {{-- Company Logo Input File --}}
         <x-inputs.text type="file" id="company_logo" name="company_logo" label="Company Logo" />
-
-        {{-- <div class="mb-4">
-            <label class="block text-gray-700" for="company_logo"
-                >Company Logo</label
-            >
-            <input
-                id="company_logo"
-                type="file"
-                name="company_logo"
-                class="w-full px-4 py-2 border rounded focus:outline-none"
-            />
-        </div> --}}
 
         <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">
             Save
