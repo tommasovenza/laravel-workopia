@@ -34,6 +34,7 @@ class ListingController extends Controller
     {
         $validated_data = $request->validate([
             'title' => 'required',
+            'description' => 'required',
             'address' => 'required',
             'city' => 'required',
             'state' => 'required',

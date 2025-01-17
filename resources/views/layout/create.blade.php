@@ -9,13 +9,13 @@
         <h2 class="text-2xl font-bold mb-6 text-center text-gray-500">Job Info</h2>
 
         {{-- Job Title Input Text --}}
-        <x-inputs.text id="title" name="title" value="Job Title" placeholder="Software Engineer" />
+        <x-inputs.text id="title" name="title" label="Job Title" placeholder="Software Engineer" />
 
         {{-- Textarea Job Description --}}
         <x-inputs.text-area label="Job Description" id="description" name="description" placeholder="We are seeking a skilled and motivated Software Developer to join our growing development team..." />
 
         {{-- Salary Input Number --}}
-        <x-inputs.text type="number" id="salary" name="salary" value="Annual Salary" placeholder="90000" />
+        <x-inputs.text type="number" id="salary" name="salary" label="Annual Salary" placeholder="90000" />
 
         {{-- Textarea Requirements --}}
         <x-inputs.text-area label="Requirements" id="requirements" name="requirements" placeholder="Bachelor's degree in Computer Science" />
@@ -24,7 +24,7 @@
         <x-inputs.text-area label="Benefits" id="benefits" name="benefits" placeholder="Health insurance, 401k, paid time off" />
 
         {{-- Job Title Input Text --}}
-        <x-inputs.text id="tags" name="tags" value="Tags (comma-separated)" placeholder="development,coding,java,python" />
+        <x-inputs.text id="tags" name="tags" label="Tags (comma-separated)" placeholder="development,coding,java,python" />
 
         <div class="mb-4">
             <label class="block text-gray-700" for="job_type"
@@ -62,37 +62,37 @@
         </div>
 
         {{-- Address Input Text --}}
-        <x-inputs.text id="address" name="address" value="Address" placeholder="123 Main St" />
+        <x-inputs.text id="address" name="address" label="Address" placeholder="123 Main St" />
 
         {{-- City Input Text --}}
-        <x-inputs.text id="city" name="city" value="City" placeholder="Albany" />
+        <x-inputs.text id="city" name="city" label="City" placeholder="Albany" />
 
         {{-- State Input Text --}}
-        <x-inputs.text id="state" name="state" value="State" placeholder="NY" />
+        <x-inputs.text id="state" name="state" label="State" placeholder="NY" />
 
         {{-- ZipCode Input Text --}}
-        <x-inputs.text id="zipcode" name="zipcode" value="Zip Code" placeholder="12201" />
+        <x-inputs.text id="zipcode" name="zipcode" label="Zip Code" placeholder="12201" />
 
         {{-- Heading --}}
         <h2 class="text-2xl font-bold mb-6 text-center text-gray-500">Company Info</h2>
 
         {{-- Company Name Input Text --}}
-        <x-inputs.text id="company_name" name="company_name" value="Company Name" placeholder="Company name" />
+        <x-inputs.text id="company_name" name="company_name" label="Company Name" placeholder="Company name" />
 
         {{-- Textarea Company Description --}}
         <x-inputs.text-area label="Company Description" id="company_description" name="company_description" placeholder="Company Description" />
 
         {{-- Company Website Input Text --}}
-        <x-inputs.text id="company_website" name="company_website" value="Company Website" placeholder="Enter website" />
+        <x-inputs.text id="company_website" name="company_website" label="Company Website" placeholder="Enter website" />
 
         {{-- Contact Phone Input Text --}}
-        <x-inputs.text id="contact_phone" name="contact_phone" value="Contact Phone" placeholder="Enter phone" />
+        <x-inputs.text id="contact_phone" name="contact_phone" label="Contact Phone" placeholder="Enter phone" />
 
         {{-- Contact Email Input Email --}}
-        <x-inputs.text type="email" id="contact_email" name="contact_email" value="Contact Email" placeholder="Email where you want to receive applications" />
+        <x-inputs.text type="email" id="contact_email" name="contact_email" label="Contact Email" placeholder="Email where you want to receive applications" />
 
         {{-- Company Logo Input File --}}
-        <x-inputs.text type="file" id="company_logo" name="company_logo" value="Company Logo" />
+        <x-inputs.text type="file" id="company_logo" name="company_logo" label="Company Logo" />
 
         {{-- <div class="mb-4">
             <label class="block text-gray-700" for="company_logo"

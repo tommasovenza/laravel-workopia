@@ -18,7 +18,7 @@
     @vite('resources/css/app.css')
     <title>Laravel Workopia</title>
 </head>
-<body>
+<body class="bg-blue-100">
     {{-- Header Component --}}
     <x-header />
     @if (request()->is('/'))
