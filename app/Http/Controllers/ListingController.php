@@ -35,13 +35,22 @@ class ListingController extends Controller
         $validated_data = $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'salary' => 'required',
+            'requirements' => 'required',
+            'benefits' => 'required',
+            'job_type' => 'required',
+            'remote' => 'required',
+            'tags' => 'required',
             'address' => 'required',
             'city' => 'required',
             'state' => 'required',
             'zipcode' => 'required',
             'company_name' => 'required',
+            'company_description' => 'required',
             'company_website' => 'required',
-            'company_phone' => 'required',
+            'contact_phone' => 'required',
+            'contact_email' => 'required',
+            'company_logo' => 'required',
         ]);
 
         if ($validated_data) {
