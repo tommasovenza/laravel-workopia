@@ -59,7 +59,9 @@ class ListingController extends Controller
         // create new listing
         Listing::create($validated_data);
 
-        return redirect()->route('index')->with('success', 'Job created successfully!');
+        return redirect()->route('index')
+            ->with('message', 'Job created successfully!')
+            ->with('type', 'success');
     }
 
     // Show Single Jobs

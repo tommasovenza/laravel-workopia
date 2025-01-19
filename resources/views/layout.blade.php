@@ -14,6 +14,8 @@
     />
     {{-- Custom CSS Includes--}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {{-- Alpine JS --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     {{-- Vite --}}
     @vite('resources/css/app.css')
     <title>Laravel Workopia</title>
@@ -27,6 +29,12 @@
     @endif
     {{-- Main --}}
     <main class="container mx-auto p-4 mt-4">
+        {{-- Printing alert with success or wrong message --}}
+        @if (session('type') === 'success')
+            <x-alert type="success" />
+            @else 
+            <x-alert type="wrong" />
+        @endif
         {{ $slot }}
     </main>
     {{-- Custom JS Includes --}}
