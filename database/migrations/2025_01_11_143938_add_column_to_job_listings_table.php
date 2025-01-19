@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::table('job_listings', function (Blueprint $table) {
             //
-            $table->string('tags');
+            $table->string('tags')->nullable();
+            $table->timestamps();
         });
     }
 

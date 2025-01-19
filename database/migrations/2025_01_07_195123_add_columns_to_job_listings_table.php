@@ -20,10 +20,10 @@ return new class extends Migration
                 ->on('users');
             // add all new columns
             $table->integer('salary');
-            $table->enum('job_type', ['Full-Time', 'Part-Time', 'On-Call'])->default('Full-Time');
+            $table->enum('job_type', ['Full-Time', 'Part-Time', 'Contract', 'Temporary', 'Internship', 'Volunteer', 'On-Call'])->default('Full-Time');
             $table->boolean('remote')->default(false);
-            $table->text('requirements');
-            $table->text('benefits');
+            $table->text('requirements')->nullable();
+            $table->text('benefits')->nullable();
             $table->text('address');
             $table->string('city');
             $table->string('state');

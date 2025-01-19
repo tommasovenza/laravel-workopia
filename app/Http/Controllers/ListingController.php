@@ -33,14 +33,14 @@ class ListingController extends Controller
     public function store(Request $request)
     {
         $validated_data = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'salary' => 'required',
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'salary' => 'required|integer',
             'requirements' => 'required',
             'benefits' => 'required',
             'job_type' => 'required',
             'remote' => 'required',
-            'tags' => 'required',
+            'tags' => 'nullable',
             'address' => 'required',
             'city' => 'required',
             'state' => 'required',
@@ -50,14 +50,16 @@ class ListingController extends Controller
             'company_website' => 'required',
             'contact_phone' => 'required',
             'contact_email' => 'required',
-            'company_logo' => 'required',
+            'company_logo' => 'nullable',
         ]);
 
-        if ($validated_data) {
-            dd('ok');
-        } else {
-            dd('not validated');
-        }
+        // Setting a new user
+        $validated_data['user_id'] = 1;
+
+        // create new listing
+        Listing::create($validated_data);
+
+        return redirect()->route('index')->with('success', 'Job created successfully!');
     }
 
     // Show Single Jobs

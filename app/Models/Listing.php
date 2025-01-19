@@ -20,6 +20,7 @@ class Listing extends Model
         "remote",
         "requirements",
         "benefits",
+        "tags",
         "address",
         "city",
         "state",
