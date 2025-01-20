@@ -20,3 +20,4 @@ yarn-error.log
 /.vscode
 /.zed
 /_theme_files
+/public/.DS_Store

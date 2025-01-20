@@ -57,10 +57,10 @@ class UserSeeder extends Seeder
             'Efimenko',
         ];
 
-
         // Truncate users table
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
+        DB::table('job_listings')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         for ($i = 1; $i <= 20; $i++) {

@@ -36,8 +36,8 @@ class ListingController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'salary' => 'required|integer',
-            'requirements' => 'required',
-            'benefits' => 'required',
+            'requirements' => 'nullable',
+            'benefits' => 'nullable',
             'job_type' => 'required',
             'remote' => 'required',
             'tags' => 'nullable',
@@ -50,8 +50,14 @@ class ListingController extends Controller
             'company_website' => 'required',
             'contact_phone' => 'required',
             'contact_email' => 'required',
-            'company_logo' => 'nullable',
+            'company_logo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        // upload inside logos folder in storage/public
+        $path = $request->file('company_logo')->store('logos', 'public');
+
+        // Storing company logo path in Database
+        $validated_data['company_logo'] = $path;
 
         // Setting a new user
         $validated_data['user_id'] = 1;

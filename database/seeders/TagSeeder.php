@@ -35,7 +35,9 @@ class TagSeeder extends Seeder
             DB::table('job_listings')->select('tags')
                 ->where('id', '=', $job->id)
                 ->update([
-                    'tags' => $data_tags[$index]["tags"]
+                    'tags' => $data_tags[$index]["tags"],
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
         }
     }

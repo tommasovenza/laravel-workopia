@@ -80,7 +80,8 @@
         <!-- Sidebar -->
         <aside class="bg-white rounded-lg shadow-md p-3">
             <h3 class="text-xl text-center mb-4 font-bold">Company Info</h3>
-            <img src="/images/{{ $job->company_logo }}" alt="Ad" class="w-full rounded-lg mb-4 m-auto"/>
+            <img src="/storage/{{ $job->company_logo }}" alt="Ad" class="w-full rounded-lg mb-4 m-auto"/>
+            
             <h4 class="text-lg font-bold">{{ $job->company_name }}</h4>
             <p class="text-gray-700 text-lg my-3">
                 {{ $job->company_description }}
