@@ -69,12 +69,53 @@ class ListingController extends Controller
             ->with('message', 'Job created successfully!')
             ->with('type', 'success');
     }
+    // Edit => show form for editing a Single Job
+    public function edit($id)
+    {
+        $job = Listing::find($id);
+        return view('layout.edit', compact('job'));
+    }
+    // Updating a Job
+    public function update(Request $request, $id)
+    {
+        $validated_data = $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'salary' => 'required|integer',
+            'requirements' => 'nullable',
+            'benefits' => 'nullable',
+            'job_type' => 'required',
+            'remote' => 'required',
+            'tags' => 'nullable',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zipcode' => 'required',
+            'company_name' => 'required',
+            'company_description' => 'required',
+            'company_website' => 'required',
+            'contact_phone' => 'required',
+            'contact_email' => 'required',
+            'company_logo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        // dd($validated_data);
+        $listing_to_update = Listing::find($id);
+
+        if ($validated_data) {
+            // create new listing
+            $listing_to_update->update($validated_data);
+
+            return redirect()->route('index')
+                ->with('message', 'Job updated successfully!')
+                ->with('type', 'success');
+        }
+    }
 
     // Show Single Jobs
     public function show($id)
     {
         $job = Listing::find($id);
-
         return view('layout.show', compact('job'));
     }
 }

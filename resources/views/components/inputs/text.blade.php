@@ -1,4 +1,4 @@
-@props(['id', 'name', 'type' => 'text', 'label' => '', 'placeholder' => ''])
+@props(['id', 'label' => '', 'type' => 'text', 'name', 'placeholder' => '', 'value' => ''])
 
 <div class="mb-4">
     @if ($label)
