@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ListingController extends Controller
 {
@@ -69,12 +70,14 @@ class ListingController extends Controller
             ->with('message', 'Job created successfully!')
             ->with('type', 'success');
     }
+
     // Edit => show form for editing a Single Job
     public function edit($id)
     {
         $job = Listing::find($id);
         return view('layout.edit', compact('job'));
     }
+
     // Updating a Job
     public function update(Request $request, $id)
     {
@@ -98,18 +101,24 @@ class ListingController extends Controller
             'contact_email' => 'required',
             'company_logo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ]);
-
-        // dd($validated_data);
+        // Job Instance
         $listing_to_update = Listing::find($id);
 
-        if ($validated_data) {
-            // create new listing
-            $listing_to_update->update($validated_data);
-
-            return redirect()->route('index')
-                ->with('message', 'Job updated successfully!')
-                ->with('type', 'success');
+        // if there's a new logo
+        if (isset($validated_data['company_logo'])) {
+            // delete old logo
+            Storage::disk('public')->delete($listing_to_update->company_logo);
+            // upload inside logos folder in storage/public
+            $path = $request->file('company_logo')->store('logos', 'public');
+            // storing company logo path in database
+            $validated_data['company_logo'] = $path;
         }
+        // create new listing
+        $listing_to_update->update($validated_data);
+
+        return redirect()->route('index')
+            ->with('message', 'Job updated successfully!')
+            ->with('type', 'success');
     }
 
     // Show Single Jobs
