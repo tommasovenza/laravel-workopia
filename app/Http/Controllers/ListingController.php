@@ -120,6 +120,21 @@ class ListingController extends Controller
             ->with('message', 'Job updated successfully!')
             ->with('type', 'success');
     }
+    // Delete Job
+    public function destroy($id)
+    {
+        // find job to delete
+        $job_to_delete = Listing::find($id);
+        // check if logo exist
+        if (isset($job_to_delete['company_logo'])) {
+            // delete path
+            Storage::disk('public')->delete($job_to_delete->company_logo);
+        }
+        // delete job
+        $job_to_delete->delete();
+
+        return redirect()->route('index')->with('message', 'Job deleted successfully')->with('type', 'success');
+    }
 
     // Show Single Jobs
     public function show($id)
