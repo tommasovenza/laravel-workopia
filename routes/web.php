@@ -35,6 +35,7 @@ Route::get('/job/{id}/show', [ListingController::class, 'show'])->name('show');
 
 // Register Routes
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/register-user', [RegisterController::class, 'store'])->name('store.register');
 
 // Login Routes
 Route::get('/login', [LoginController::class, 'login'])->name('login');
