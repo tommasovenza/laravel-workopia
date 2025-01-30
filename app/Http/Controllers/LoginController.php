@@ -12,6 +12,7 @@ class LoginController extends Controller
     {
         return view('layout.login-user.login');
     }
+
     // Auth a user into app
     public function authenticate(Request $request)
     {
@@ -34,5 +35,20 @@ class LoginController extends Controller
             return redirect()->back()->with('message', 'something was wrong!')
                 ->with('type', 'error');
         }
+    }
+
+    // Logout User
+    public function logout(Request $request)
+    {
+        // Logout user authenticated
+        Auth::logout();
+        // remove session
+        $request->session()->invalidate();
+        // remove token
+        $request->session()->regenerateToken();
+        // redirect user to home
+        return redirect()->route('home')
+            ->with('message', 'User logout successfully!')
+            ->with('type', 'success');
     }
 }

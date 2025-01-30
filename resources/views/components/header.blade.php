@@ -5,21 +5,36 @@
             <a href="{{ url('/') }}">Workopia</a>
         </h1>
         <nav class="hidden md:flex items-center space-x-4">
-            {{-- Used NavLink Component --}}
-            <x-nav-link url="/" :active="request()->is('/')">Home</x-nav-link>
-            <x-nav-link url="/jobs/index" :active="request()->is('jobs/index')">All Jobs</x-nav-link>
-            <x-nav-link url="/jobs/saved" :active="request()->is('jobs/saved')">Saved Jobs</x-nav-link>
-            <x-nav-link icon="user" url="/login" :active="request()->is('login')">Login</x-nav-link>
-            <x-nav-link url="/register" :active="request()->is('register')">Register</x-nav-link>
-            <x-nav-link url="/dashboard" :active="request()->is('dashboard')"><i class="fa fa-gauge mr-1"></i> Dashboard</x-nav-link>
-            {{-- Button Link Component --}}
-            <x-button-link 
-                url="/jobs/create" 
-                icon="edit" 
-                class="bg-yellow-500 text-black px-4 py-2 rounded hover:shadow-md transition duration-300"
-                hover="hover:bg-yellow-600"
-                >Create Job
-            </x-button-link>
+                {{-- Used NavLink Component --}}
+                <x-nav-link url="/" :active="request()->is('/')">Home</x-nav-link>
+            @guest
+                <x-nav-link url="/jobs/index" :active="request()->is('jobs/index')">All Jobs</x-nav-link>
+                <x-nav-link icon="user" url="/login" :active="request()->is('login')">Login</x-nav-link>
+                <x-nav-link url="/register" :active="request()->is('register')">Register</x-nav-link>
+            @endguest
+            @auth
+                <x-nav-link url="/dashboard" :active="request()->is('dashboard')">
+                    <i class="fa fa-gauge mr-1"></i> 
+                    Dashboard
+                </x-nav-link>
+                <x-nav-link url="/jobs/saved" :active="request()->is('jobs/saved')">
+                    Saved Jobs
+                </x-nav-link>
+                {{-- Button Link Component --}}
+                <x-button-link 
+                    url="/jobs/create" 
+                    icon="edit" 
+                    class="bg-yellow-500 text-black px-4 py-2 rounded hover:shadow-md transition duration-300"
+                    hover="hover:bg-yellow-600"
+                >
+                    Create Job
+                </x-button-link>
+                {{-- Logout form --}}
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button>Logout</button>
+                </form>
+            @endauth
         </nav>
         <button
             id="hamburger"
