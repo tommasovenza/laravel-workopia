@@ -39,3 +39,4 @@ Route::post('/register-user', [RegisterController::class, 'store'])->name('store
 
 // Login Routes
 Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/auth-user', [LoginController::class, 'authenticate'])->name('auth');
