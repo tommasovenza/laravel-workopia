@@ -12,7 +12,7 @@ class ListingController extends Controller
     // Return Home View
     public function show_home()
     {
-        $jobs = Listing::all();
+        $jobs = Listing::limit(6)->orderBy('id', 'desc')->get();
         return view('layout.home', compact('jobs'));
     }
 
@@ -20,7 +20,6 @@ class ListingController extends Controller
     public function index()
     {
         $listings = Listing::all();
-
         return view('layout.index', compact('listings'));
     }
 
