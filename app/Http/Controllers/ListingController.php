@@ -60,7 +60,7 @@ class ListingController extends Controller
         $validated_data['company_logo'] = $path;
 
         // Setting a new user
-        $validated_data['user_id'] = 1;
+        $validated_data['user_id'] = auth()->user()->id;
 
         // create new listing
         Listing::create($validated_data);
