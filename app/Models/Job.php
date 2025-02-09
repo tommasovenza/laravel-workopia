@@ -32,4 +32,9 @@ class Job extends Model
         "company_logo",
         "company_website",
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
 
 // Home Route
 Route::get('/', [JobController::class, 'show_home'])->name('home');
@@ -28,3 +29,6 @@ Route::post('/register-user', [RegisterController::class, 'store'])->name('store
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/auth-user', [LoginController::class, 'authenticate'])->name('auth')->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
+// Dashboard Routes
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard-index');

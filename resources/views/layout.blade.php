@@ -32,7 +32,7 @@
         {{-- Printing alert with success or wrong message --}}
         @if (session('type') === 'success')
             <x-alert type="success" />
-            @else 
+        @else 
             <x-alert type="wrong" />
         @endif
         {{ $slot }}
