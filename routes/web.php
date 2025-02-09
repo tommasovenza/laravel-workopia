@@ -1,23 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ListingController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 
 // Home Route
-Route::get('/', [ListingController::class, 'show_home'])->name('home');
+Route::get('/', [JobController::class, 'show_home'])->name('home');
 
 // Auth Middleware
 Route::middleware('auth')->group(function () {
     // Auth Job Crud Routes
-    Route::get('/jobs/index', [ListingController::class, 'index'])->name('index');
-    Route::get('/jobs/create', [ListingController::class, 'create'])->name('create');
-    Route::post('/jobs/store', [ListingController::class, 'store'])->name('store');
-    Route::get('/jobs/{id}/edit', [ListingController::class, 'edit'])->name('edit');
-    Route::put('/jobs/{id}/update', [ListingController::class, 'update'])->name('update');
-    Route::delete('/jobs/{id}', [ListingController::class, 'destroy'])->name('destroy');
-    Route::get('/job/{id}/show', [ListingController::class, 'show'])->name('show');
+    Route::get('/jobs/index', [JobController::class, 'index'])->name('index');
+    Route::get('/job/create', [JobController::class, 'create'])->name('create');
+    Route::post('/job/store', [JobController::class, 'store'])->name('store');
+    Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('edit');
+    Route::put('/jobs/{job}', [JobController::class, 'update'])->name('update');
+    Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('destroy');
+    Route::get('/jobs/{job}/show', [JobController::class, 'show'])->name('show');
 });
 
 // Register Routes

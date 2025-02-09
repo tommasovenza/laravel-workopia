@@ -2,28 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Listing;
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class ListingController extends Controller
+class JobController extends Controller
 {
+    use AuthorizesRequests;
 
     // Return Home View
     public function show_home()
     {
-        $jobs = Listing::limit(6)->orderBy('id', 'desc')->get();
+        $jobs = Job::limit(6)->orderBy('id', 'desc')->get();
         return view('layout.home', compact('jobs'));
     }
 
     // Indexing Jobs
     public function index()
     {
-        $listings = Listing::all();
+        $listings = Job::all();
         return view('layout.index', compact('listings'));
     }
 
-    // Create => show form to create a new listing resource
+    // Create => show form to create a new Job resource
     public function create()
     {
         return view('layout.create');
@@ -62,8 +64,8 @@ class ListingController extends Controller
         // Setting a new user
         $validated_data['user_id'] = auth()->user()->id;
 
-        // create new listing
-        Listing::create($validated_data);
+        // create new Job
+        Job::create($validated_data);
 
         return redirect()->route('index')
             ->with('message', 'Job created successfully!')
@@ -71,15 +73,20 @@ class ListingController extends Controller
     }
 
     // Edit => show form for editing a Single Job
-    public function edit($id)
+    public function edit(Job $job)
     {
-        $job = Listing::find($id);
+        // testing authorization
+        $this->authorize('update', $job);
+
         return view('layout.edit', compact('job'));
     }
 
     // Updating a Job
-    public function update(Request $request, $id)
+    public function update(Request $request, Job $job)
     {
+        // Authorizing Job 
+        $this->authorize('update', $job);
+
         $validated_data = $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
@@ -100,45 +107,47 @@ class ListingController extends Controller
             'contact_email' => 'required',
             'company_logo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ]);
-        // Job Instance
-        $listing_to_update = Listing::find($id);
 
         // if there's a new logo
         if (isset($validated_data['company_logo'])) {
             // delete old logo
-            Storage::disk('public')->delete($listing_to_update->company_logo);
+            Storage::disk('public')->delete($job->company_logo);
             // upload inside logos folder in storage/public
             $path = $request->file('company_logo')->store('logos', 'public');
             // storing company logo path in database
             $validated_data['company_logo'] = $path;
         }
-        // create new listing
-        $listing_to_update->update($validated_data);
+        // create new Job
+        $job->update($validated_data);
 
         return redirect()->route('index')
             ->with('message', 'Job updated successfully!')
             ->with('type', 'success');
     }
     // Delete Job
-    public function destroy($id)
+    public function destroy(Job $job)
     {
-        // find job to delete
-        $job_to_delete = Listing::find($id);
+        // Authorizing Job
+        $this->authorize('delete', $job);
+
         // check if logo exist
-        if (isset($job_to_delete['company_logo'])) {
+        if (isset($job['company_logo'])) {
             // delete path
-            Storage::disk('public')->delete($job_to_delete->company_logo);
+            Storage::disk('public')->delete($job->company_logo);
         }
         // delete job
-        $job_to_delete->delete();
+        $job->delete();
 
         return redirect()->route('index')->with('message', 'Job deleted successfully')->with('type', 'success');
     }
 
     // Show Single Jobs
-    public function show($id)
+    public function show(Job $job)
     {
-        $job = Listing::find($id);
-        return view('layout.show', compact('job'));
+        if (isset($job)) {
+            return view('layout.show', compact('job'));
+        } else {
+            abort(404);
+        }
     }
 }

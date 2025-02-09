@@ -2,17 +2,11 @@
 
 namespace App\Providers;
 
-use App\Models\Listing;
-use App\Policies\JobPolicy;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
-
-    protected $policies = [
-        Listing::class => JobPolicy::class,
-    ];
-
     /**
      * Register any application services.
      */
@@ -27,6 +21,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        $this->registerPolicies();
     }
 }
