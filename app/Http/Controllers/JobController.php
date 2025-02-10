@@ -55,18 +55,20 @@ class JobController extends Controller
             'company_logo' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // upload inside logos folder in storage/public
-        $path = $request->file('company_logo')->store('logos', 'public');
-
-        // Storing company logo path in Database
-        $validated_data['company_logo'] = $path;
-
+        // if there is a logo
+        if ($request->file('company_logo') !== null) {
+            // upload inside logos folder in storage/public
+            $path = $request->file('company_logo')->store('logos', 'public');
+            // Storing company logo path in Database
+            $validated_data['company_logo'] = $path;
+        }
         // Setting a new user
         $validated_data['user_id'] = auth()->user()->id;
 
         // create new Job
         Job::create($validated_data);
 
+        // redirect
         return redirect()->route('index')
             ->with('message', 'Job created successfully!')
             ->with('type', 'success');
