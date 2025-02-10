@@ -130,6 +130,9 @@ class JobController extends Controller
         // Authorizing Job
         $this->authorize('delete', $job);
 
+        // check for query params
+        $param = request()->query('from-dashboard');
+
         // check if logo exist
         if (isset($job['company_logo'])) {
             // delete path
@@ -137,6 +140,10 @@ class JobController extends Controller
         }
         // delete job
         $job->delete();
+
+        if ($param === "yes") {
+            return redirect()->route('dashboard-index')->with('message', 'Job deleted successfully')->with('type', 'success');
+        }
 
         return redirect()->route('index')->with('message', 'Job deleted successfully')->with('type', 'success');
     }
