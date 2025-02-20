@@ -8,13 +8,17 @@
             <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-
                 {{-- Input Name --}}
                 <x-inputs.text id="name" name="name" value="{{ $user->name }}" />
                 {{-- Input Email --}}
                 <x-inputs.text id="email" type="email" name="email" value="{{ $user->email }}" />
-
-                <button type="submit" class="bg-green-500 hover:bg-green-600 rounded text-sm text-white p-2 w-full">Update</button>
+                {{-- Input File --}}
+                <x-inputs.text id="avatar" type="file" name="avatar" />
+                {{-- Button Submit --}}
+                <button 
+                    type="submit" 
+                    class="bg-green-500 hover:bg-green-600 rounded text-sm text-white p-2 w-full">Update
+                </button>
             </form>
         </div>
         {{-- Job listing Area Index --}}
