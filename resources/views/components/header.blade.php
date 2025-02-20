@@ -35,6 +35,13 @@
                 >
                     Create Job
                 </x-button-link>
+
+                {{-- Avatar --}}
+                @if (auth()->user()->avatar)
+                <div class="image-container flex justify-center m-4">
+                    <img class="h-14 w-14 object-cover rounded-full" src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}">
+                </div>
+                @endif
             @endauth
         </nav>
         {{-- Button --}}
