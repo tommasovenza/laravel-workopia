@@ -19,25 +19,38 @@ class ProfileController extends Controller
             'avatar' => 'nullable|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
+        // dd($validated_data['avatar']);
+
         // if exists avatar delete old path
-        if ($validated_data['avatar']) {
+        if (isset($validated_data['avatar'])) {
             // delete old file from public folder
             Storage::disk('public')->delete(auth()->user()->avatar);
             // Get file
             $file = $request->avatar;
             // Store new File into avatar folder
             $path = $file->store('avatars', 'public');
+
+            // Find Logged user
+            $user = Auth::user();
+
+            // Update User values
+            DB::table('users')->where('id', $user->id)->update([
+                'name' => $validated_data['name'],
+                'email' => $validated_data['email'],
+                'avatar' => $path,
+            ]);
+        } else {
+            // Find Logged user
+            $user = Auth::user();
+
+            // Update User values
+            DB::table('users')->where('id', $user->id)->update([
+                'name' => $validated_data['name'],
+                'email' => $validated_data['email'],
+            ]);
         }
 
-        // Find Logged user
-        $user = Auth::user();
 
-        // Update User values
-        DB::table('users')->where('id', $user->id)->update([
-            'name' => $validated_data['name'],
-            'email' => $validated_data['email'],
-            'avatar' => $path,
-        ]);
 
         // redirect
         return redirect()->route('dashboard-index')
