@@ -3,7 +3,14 @@
     <section class="flex flex-col md:flex-row gap-4">
         {{-- Profile Area --}}
         <div class="profile w-full bg-white rounded p-4 mt-4">
-            <h3 class="text-3xl text-center mb-10">Profile</h3>
+            <h3 class="text-3xl text-center">Profile</h3>
+
+            @if ($user->avatar)
+                <div class="image-container flex justify-center m-4">
+                    <img class="h-48 w-48 object-cover rounded-full" src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->name }}">
+                </div>
+            @endif
+
             {{-- Update profile --}}
             <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                 @csrf
