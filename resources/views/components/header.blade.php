@@ -8,7 +8,6 @@
             {{-- Used NavLink Component --}}
             <x-nav-link url="/" :active="request()->is('/')">Home</x-nav-link>
             @guest
-                <x-nav-link url="/jobs/index" :active="request()->is('jobs/index')">All Jobs</x-nav-link>
                 <x-nav-link url="/login" :active="request()->is('login')">
                     <i class="fa fa-user mr-1"></i> Login
                 </x-nav-link>
@@ -19,6 +18,7 @@
                     <i class="fa fa-gauge mr-1"></i> 
                     Dashboard
                 </x-nav-link>
+                <x-nav-link url="/jobs/index" :active="request()->is('jobs/index')">All Jobs</x-nav-link>
                 <x-nav-link url="/jobs/saved" :active="request()->is('jobs/saved')">
                     Saved Jobs
                 </x-nav-link>

@@ -5,4 +5,6 @@
         <x-job-card :job="$listing" />
     @endforeach
     </div>
+
+   {{ $listings->links() }}
 </x-layout>
