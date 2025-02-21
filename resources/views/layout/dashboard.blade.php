@@ -20,7 +20,7 @@
                 {{-- Input Email --}}
                 <x-inputs.text id="email" type="email" name="email" value="{{ $user->email }}" />
                 {{-- Input File --}}
-                <x-inputs.text id="avatar" type="file" name="avatar" />
+                <x-inputs.text id="avatar" type="file" name="avatar" label="avatar" />
                 {{-- Button Submit --}}
                 <button 
                     type="submit" 

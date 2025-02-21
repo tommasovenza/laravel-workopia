@@ -23,8 +23,11 @@ class ProfileController extends Controller
 
         // if exists avatar delete old path
         if (isset($validated_data['avatar'])) {
-            // delete old file from public folder
-            Storage::disk('public')->delete(auth()->user()->avatar);
+
+            if (isset(auth()->user()->avatar)) {
+                // delete old file from public folder
+                Storage::disk('public')->delete(auth()->user()->avatar);
+            }
             // Get file
             $file = $request->avatar;
             // Store new File into avatar folder
