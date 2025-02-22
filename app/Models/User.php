@@ -53,7 +53,7 @@ class User extends Authenticatable
     // jobs marked by this user
     public function markedJobs()
     {
-        return $this->belongsToMany(Job::class, 'listing_user')
+        return $this->belongsToMany(Job::class, 'listing_user', 'user_id', 'job_listing_id')
             ->withTimestamps();
     }
 }
