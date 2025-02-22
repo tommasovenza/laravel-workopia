@@ -37,4 +37,11 @@ class Job extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    // return all users that has marked this job
+    public function ownerUsers()
+    {
+        return $this->belongsToMany(User::class, 'listing_user')
+            ->withTimestamps();
+    }
 }

@@ -49,4 +49,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Job::class);
     }
+
+    // jobs marked by this user
+    public function markedJobs()
+    {
+        return $this->belongsToMany(Job::class, 'listing_user')
+            ->withTimestamps();
+    }
 }
