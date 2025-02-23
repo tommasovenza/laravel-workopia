@@ -19,7 +19,7 @@
                     Dashboard
                 </x-nav-link>
                 <x-nav-link url="/jobs/index" :active="request()->is('jobs/index')">All Jobs</x-nav-link>
-                <x-nav-link url="/jobs/saved" :active="request()->is('jobs/saved')">
+                <x-nav-link url="/saved-jobs" :active="request()->is('saved-jobs')">
                     Saved Jobs
                 </x-nav-link>
 
@@ -66,8 +66,8 @@
             <x-nav-link 
                 :mobile="true" 
                 :block="true" 
-                url="/jobs/saved" 
-                :active="request()->is('jobs/saved')">
+                url="/saved-jobs" 
+                :active="request()->is('saved-jobs')">
                 Saved Jobs
             </x-nav-link>
 

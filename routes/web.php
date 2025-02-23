@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/jobs/{job}', [JobController::class, 'update'])->name('update');
     Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('destroy');
     Route::get('/jobs/{job}/show', [JobController::class, 'show'])->name('show');
+    Route::get('/saved-jobs', [JobController::class, 'showSavedJobs'])->name('saved-jobs');
 });
 
 // Register Routes
@@ -36,4 +37,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard-index');
 Route::put('/profile-update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
 
+
+
+// Test Route
 Route::get('/test', [TestController::class, 'test']);

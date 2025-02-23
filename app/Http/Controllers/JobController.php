@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -158,5 +159,13 @@ class JobController extends Controller
         } else {
             abort(404);
         }
+    }
+    // show user's saved Job
+    public function showSavedJobs()
+    {
+        $user = Auth::user();
+        $saved_jobs = $user->markedJobs;
+
+        return view('layout.saved', compact('saved_jobs'));
     }
 }
