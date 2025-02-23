@@ -164,7 +164,7 @@ class JobController extends Controller
     public function showSavedJobs()
     {
         $user = Auth::user();
-        $saved_jobs = $user->markedJobs;
+        $saved_jobs = $user->markedJobs()->paginate(3);
 
         return view('layout.saved', compact('saved_jobs'));
     }

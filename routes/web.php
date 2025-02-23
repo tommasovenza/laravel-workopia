@@ -37,7 +37,5 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard-index');
 Route::put('/profile-update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
 
-
-
 // Test Route
 Route::get('/test', [TestController::class, 'test']);
