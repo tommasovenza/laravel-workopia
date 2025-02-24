@@ -36,6 +36,15 @@ class BookmarkController extends Controller
 
     public function destroy(Job $job): RedirectResponse
     {
-        dd($job);
+        // get user
+        $user = Auth::user();
+
+        // deleting relation between user and job
+        $user->markedJobs()->detach($job->id);
+
+        // redirect home
+        return redirect()->route('home')
+            ->with('message', 'Job deleted successfully!')
+            ->with('type', 'success');
     }
 }
