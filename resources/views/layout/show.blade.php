@@ -93,9 +93,12 @@
             <a href="{{ $job->company_website }}" target="_blank" class="text-blue-500">
                 Visit Website
             </a>
-            <a href="" class="mt-10 bg-blue-500 hover:bg-blue-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center">
-                <i class="fas fa-bookmark mr-3"></i> Bookmark Listing
-            </a>
+            <form action="{{ route('bookmark.store', $job->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="mt-10 bg-blue-500 hover:bg-blue-600 text-white font-bold w-full  py-2 px-4 rounded-full flex items-center justify-center">
+                    <i class="fas fa-bookmark mr-3"></i> Bookmark Listing
+                </button>
+            </form>
         </aside>
     </div>
 </x-layout>

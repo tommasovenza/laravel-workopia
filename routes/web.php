@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BookmarkController;
 
 // Home Route
 Route::get('/', [JobController::class, 'show_home'])->name('home');
@@ -36,6 +37,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 // Dashboard Routes
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard-index');
 Route::put('/profile-update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
+
+// Bookmark Store Route
+Route::post('/bookmark/store/{job}', [BookmarkController::class, 'store'])->name('bookmark.store');
 
 // Test Route
 Route::get('/test', [TestController::class, 'test']);
