@@ -93,12 +93,31 @@
             <a href="{{ $job->company_website }}" target="_blank" class="text-blue-500">
                 Visit Website
             </a>
-            <form action="{{ route('bookmark.store', $job->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="mt-10 bg-blue-500 hover:bg-blue-600 text-white font-bold w-full  py-2 px-4 rounded-full flex items-center justify-center">
-                    <i class="fas fa-bookmark mr-3"></i> Bookmark Listing
-                </button>
-            </form>
+
+            @guest
+                <a class="mt-10 bg-gray-500 hover:bg-gray-600 text-white font-bold w-full  py-2 px-4 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-circle-info mr-2"></i> Login to save jobs
+                </a>
+            @endguest
+
+            @auth
+                @if (auth()->user()->markedJobs()->where('job_listing_id', $job->id)->exists())
+                <form action="{{ route('bookmark.destroy', $job->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="mt-10 bg-red-500 hover:bg-red-600 text-white font-bold w-full  py-2 px-4 rounded-full flex items-center justify-center">
+                        <i class="fas fa-bookmark mr-3"></i> Delete Bookmark
+                    </button>
+                </form>
+                @else
+                <form action="{{ route('bookmark.store', $job->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="mt-10 bg-blue-500 hover:bg-blue-600 text-white font-bold w-full  py-2 px-4 rounded-full flex items-center justify-center">
+                        <i class="fas fa-bookmark mr-3"></i> Bookmark Listing
+                    </button>
+                </form>
+                @endif
+            @endauth
         </aside>
     </div>
 </x-layout>

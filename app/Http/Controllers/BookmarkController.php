@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Job;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Job;
 
 class BookmarkController extends Controller
 {
@@ -32,5 +32,10 @@ class BookmarkController extends Controller
         return redirect()->route('home')
             ->with('message', 'Job saved successfully!')
             ->with('type', 'success');
+    }
+
+    public function destroy(Job $job): RedirectResponse
+    {
+        dd($job);
     }
 }
