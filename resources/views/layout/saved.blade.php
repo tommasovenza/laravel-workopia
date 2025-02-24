@@ -1,5 +1,7 @@
 <x-layout>
-    <h1 class="text-3xl text-centered px-2 py-4">Saved Jobs</h1>
+    <div class="text-center text-3xl font-bold m-4 px-2 py-4 border-2 border-solid border-indigo-400 rounded">
+        <h1>Saved Jobs</h1>
+    </div>
     <div class="grid lg:grid-cols-3 gap-4">
         @forelse ($saved_jobs as $job)
             <x-job-card :job="$job" />
