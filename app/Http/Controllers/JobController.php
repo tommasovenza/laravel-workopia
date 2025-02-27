@@ -23,13 +23,13 @@ class JobController extends Controller
     public function index()
     {
         $listings = Job::paginate(6);
-        return view('layout.index', compact('listings'));
+        return view('layout.jobs.index', compact('listings'));
     }
 
     // Create => show form to create a new Job resource
     public function create()
     {
-        return view('layout.create');
+        return view('layout.jobs.create');
     }
 
     // Store => make validation and store a new job into DB
@@ -81,7 +81,7 @@ class JobController extends Controller
         // testing authorization
         $this->authorize('update', $job);
 
-        return view('layout.edit', compact('job'));
+        return view('layout.jobs.edit', compact('job'));
     }
 
     // Updating a Job
@@ -155,7 +155,7 @@ class JobController extends Controller
     public function show(Job $job)
     {
         if (isset($job)) {
-            return view('layout.show', compact('job'));
+            return view('layout.jobs.show', compact('job'));
         } else {
             abort(404);
         }
@@ -166,6 +166,6 @@ class JobController extends Controller
         $user = Auth::user();
         $saved_jobs = $user->markedJobs()->paginate(3);
 
-        return view('layout.saved', compact('saved_jobs'));
+        return view('layout.jobs.saved', compact('saved_jobs'));
     }
 }
