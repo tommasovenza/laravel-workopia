@@ -76,12 +76,12 @@
                 </a> --}}
 
                 <div x-data="{ open: false }" x-cloak>
-                    <button x-on:click="open = true" x-on:click.away="open = false" class="block w-full text-center px-5 py-2.5 shadow-sm rounded font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
+                    <button x-on:click="open = true" class="block w-full text-center px-5 py-2.5 shadow-sm rounded font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
                         Apply Now
                     </button>
                     {{-- Contents --}}
                     <div x-show="open" class="fixed inset-0 grid place-items-center bg-black bg-opacity-60 w-screen h-screen">
-                        <div class="modal-inner bg-white min-w-80 p-8 rounded">
+                        <div x-on:click.away="open = false" class="modal-inner bg-white w-[500px] p-8 rounded">
                             <h1 class="text-lg">Modal Content</h1>
                             <form action="{{ route('applicant-job') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
