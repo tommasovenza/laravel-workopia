@@ -71,9 +71,21 @@
                     Put "Job Application" as the subject of your email
                     and attach your resume.
                 </p>
-                <a href="mailto:{{ $job->contact_email }}" class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
+                {{-- <a href="mailto:{{ $job->contact_email }}" class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
                     Apply Now
-                </a>
+                </a> --}}
+
+                <div x-data="{ open: false }">
+                    <button x-on:click="open = true" x-on:click.away="open = false" class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
+                        Apply Now
+                    </button>
+                    {{-- Contents --}}
+                    <div x-show="open" class="fixed inset-0 grid place-items-center bg-black bg-opacity-60 w-screen h-screen">
+                        <div class="modal-inner bg-white min-w-80 text-center p-4 rounded">
+                            <h1>Modal Content</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {{-- <div class="bg-white p-6 rounded-lg shadow-md mt-6">
