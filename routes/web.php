@@ -42,5 +42,8 @@ Route::get('/login', [LoginController::class, 'login'])->name('login')->middlewa
 Route::post('/auth-user', [LoginController::class, 'authenticate'])->name('auth')->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
+// Applications Route
+Route::post('/applicant-job', [TestController::class, 'applicantJob'])->name('applicant-job');
+
 // Test Route
 Route::get('/test', [TestController::class, 'test']);

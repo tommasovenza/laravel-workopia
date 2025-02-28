@@ -75,14 +75,24 @@
                     Apply Now
                 </a> --}}
 
-                <div x-data="{ open: false }">
-                    <button x-on:click="open = true" x-on:click.away="open = false" class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
+                <div x-data="{ open: false }" x-cloak>
+                    <button x-on:click="open = true" x-on:click.away="open = false" class="block w-full text-center px-5 py-2.5 shadow-sm rounded font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
                         Apply Now
                     </button>
                     {{-- Contents --}}
                     <div x-show="open" class="fixed inset-0 grid place-items-center bg-black bg-opacity-60 w-screen h-screen">
-                        <div class="modal-inner bg-white min-w-80 text-center p-4 rounded">
-                            <h1>Modal Content</h1>
+                        <div class="modal-inner bg-white min-w-80 p-8 rounded">
+                            <h1 class="text-lg">Modal Content</h1>
+                            <form action="{{ route('applicant-job') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <x-inputs.text id="full_name" name="full_name" label="Full Name" placeholder="Full Name" :required="true" />
+                                <x-inputs.text id="contact_phone" name="contact_phone" label="Contact Phone" placeholder="Contact Phone" :required="true" />
+                                <x-inputs.text id="contact_email" type="email" name="contact_email" label="Contact Email" placeholder="Contact Email" :required="true" />
+                                <x-inputs.text id="location" name="location" label="Location" placeholder="Location" :required="true" />
+                                <x-inputs.text id="resume_path" name="resume_path" label="Resume Path" placeholder="Resume Path" :required="true" />
+                                {{-- Button Submit --}}
+                                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">Send</button>
+                            </form>
                         </div>
                     </div>
                 </div>

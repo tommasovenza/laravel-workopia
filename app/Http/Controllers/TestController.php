@@ -16,4 +16,9 @@ class TestController extends Controller
         // $job = Job::find(3);
         // dd($job->ownerUsers);
     }
+
+    public function applicantJob(Request $request)
+    {
+        dd($request->all());
+    }
 }
