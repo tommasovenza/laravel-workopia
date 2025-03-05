@@ -23,11 +23,9 @@ class ApplicantController extends Controller
         ]);
 
         if ($validatedData) {
-
             // store upload
             $path = $validatedData['resume_path']->store('resumes', 'public');
             $logged_user = Auth::user();
-
             // store in db
             $applicant = new Applicant();
             $applicant->user_id = $logged_user->id;
@@ -39,7 +37,7 @@ class ApplicantController extends Controller
             $applicant->location = $validatedData['location'];
             $applicant->resume_path = $path;
             $applicant->save();
-
+            // redirect
             return redirect()->route('home')
                 ->with('message', 'Applicant saved!')
                 ->with('type', 'success');
@@ -48,5 +46,16 @@ class ApplicantController extends Controller
                 ->with('message', 'Something goes wrong')
                 ->with('type', 'error');
         }
+    }
+
+    public function destroy($id): RedirectResponse
+    {
+        // find instance
+        $applicant = Applicant::findOrFail($id);
+        // deleting applicant
+        $applicant->delete();
+        // redirect
+        return redirect()->back()->with('message', 'Applicant deleted successfully')
+            ->with('type', 'success');
     }
 }

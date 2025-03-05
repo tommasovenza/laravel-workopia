@@ -45,6 +45,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 
 // Applications Route
 Route::post('/applicant-store/{job}', [ApplicantController::class, 'store'])->name('applicant.store')->middleware('auth');
+Route::delete('/applicant-delete/{applicant}', [ApplicantController::class, 'destroy'])->name('applicant.destroy')->middleware('auth');
 
 // Test Route
 Route::get('/test', [TestController::class, 'test']);
