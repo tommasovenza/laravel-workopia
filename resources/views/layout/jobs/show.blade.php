@@ -71,9 +71,6 @@
                     Put "Job Application" as the subject of your email
                     and attach your resume.
                 </p>
-                {{-- <a href="mailto:{{ $job->contact_email }}" class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
-                    Apply Now
-                </a> --}}
 
                 <div x-data="{ open: false }" x-cloak>
                     <button x-on:click="open = true" class="block w-full text-center px-5 py-2.5 shadow-sm rounded font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
@@ -82,16 +79,27 @@
                     {{-- Contents --}}
                     <div x-show="open" class="fixed inset-0 grid place-items-center bg-black bg-opacity-60 w-screen h-screen">
                         <div x-on:click.away="open = false" class="modal-inner bg-white w-[500px] p-8 rounded">
-                            <h1 class="text-lg">Modal Content</h1>
-                            <form action="{{ route('applicant-job') }}" method="POST" enctype="multipart/form-data">
+                            <h3 class="text-lg">Applicant for {{ $job->title }}</h3>
+                            <form action="{{ route('applicant.store', $job->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                {{-- Full Name --}}
                                 <x-inputs.text id="full_name" name="full_name" label="Full Name" placeholder="Full Name" :required="true" />
+                                {{-- Contact Phone --}}
                                 <x-inputs.text id="contact_phone" name="contact_phone" label="Contact Phone" placeholder="Contact Phone" :required="true" />
+                                {{-- Contact Email --}}
                                 <x-inputs.text id="contact_email" type="email" name="contact_email" label="Contact Email" placeholder="Contact Email" :required="true" />
+                                {{-- Message --}}
+                                <x-inputs.text-area cols="3"
+                                rows="3" id="message" placeholder="Message" name="message" label="Message" :required="true" />
+                                {{-- Location --}}
                                 <x-inputs.text id="location" name="location" label="Location" placeholder="Location" :required="true" />
-                                <x-inputs.text id="resume_path" name="resume_path" label="Resume Path" placeholder="Resume Path" :required="true" />
+                                {{-- Resume Path --}}
+                                <x-inputs.text id="resume_path" type="file" name="resume_path" label="Resume Path" placeholder="Resume Path" :required="true" />
+                                
                                 {{-- Button Submit --}}
-                                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">Send</button>
+                                <div>
+                                    <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">Send</button>
+                                </div>
                             </form>
                         </div>
                     </div>

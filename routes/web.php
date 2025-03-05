@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\BookmarkController;
 
 // Home Route
@@ -43,7 +44,7 @@ Route::post('/auth-user', [LoginController::class, 'authenticate'])->name('auth'
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 // Applications Route
-Route::post('/applicant-job', [TestController::class, 'applicantJob'])->name('applicant-job');
+Route::post('/applicant-store/{job}', [ApplicantController::class, 'store'])->name('applicant.store');
 
 // Test Route
 Route::get('/test', [TestController::class, 'test']);
