@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('listing_user', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('job_listing_id')->references('id')->on('job_listings')->onDelete('cascade'); // WRONG
-            // $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade'); // WRONG
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('job_listing_id')->constrained('job_listings')->onDelete('cascade');
             $table->timestamps();
