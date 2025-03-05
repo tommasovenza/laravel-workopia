@@ -43,7 +43,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('login')->middlewa
 Route::post('/auth-user', [LoginController::class, 'authenticate'])->name('auth')->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Applications Route
+// Job Application's Routes
 Route::post('/applicant-store/{job}', [ApplicantController::class, 'store'])->name('applicant.store')->middleware('auth');
 Route::delete('/applicant-delete/{applicant}', [ApplicantController::class, 'destroy'])->name('applicant.destroy')->middleware('auth');
 

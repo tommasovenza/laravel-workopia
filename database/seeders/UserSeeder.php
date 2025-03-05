@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Str;
+// use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
@@ -57,11 +57,12 @@ class UserSeeder extends Seeder
             'Efimenko',
         ];
 
-        // Truncate users, job_listings and listing_user tables
+        // Truncate users, job_listings listing_user and applicants tables
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
         DB::table('job_listings')->truncate();
         DB::table('listing_user')->truncate();
+        DB::table('applicants')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         for ($i = 1; $i <= 20; $i++) {
