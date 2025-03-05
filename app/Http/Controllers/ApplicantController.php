@@ -13,6 +13,19 @@ class ApplicantController extends Controller
     //
     public function store(Request $request, Job $job): RedirectResponse
     {
+        // get logged user
+        $logged_user = Auth::user();
+        // check if it's just exists a job applicant
+        $existingApplicant = Applicant::where('job_listing_id', $job->id)
+            ->where('user_id', $logged_user->id)->exists();
+        // dd($existingApplicant);
+
+        if ($existingApplicant) {
+            return redirect()->back()
+                ->with('message', 'You have just apply this job!')
+                ->with('type', 'error');
+        }
+
         $validatedData = $request->validate([
             'full_name' => 'required|string',
             'contact_phone' => 'string',
@@ -25,7 +38,6 @@ class ApplicantController extends Controller
         if ($validatedData) {
             // store upload
             $path = $validatedData['resume_path']->store('resumes', 'public');
-            $logged_user = Auth::user();
             // store in db
             $applicant = new Applicant();
             $applicant->user_id = $logged_user->id;
@@ -39,7 +51,7 @@ class ApplicantController extends Controller
             $applicant->save();
             // redirect
             return redirect()->route('home')
-                ->with('message', 'Applicant saved!')
+                ->with('message', 'Applicant submitted successfully!')
                 ->with('type', 'success');
         } else {
             return redirect()->route('home')
