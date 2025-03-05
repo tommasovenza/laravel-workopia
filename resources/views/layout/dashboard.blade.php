@@ -32,10 +32,10 @@
         <div class="job-area w-full bg-white rounded p-4 mt-4">
             <h3 class="text-3xl text-center mb-10">My Job Listing</h3>
             <div class="container">
-            @forelse ($jobs as $job)
+                @forelse ($jobs as $job)
                 <div class="job-row flex justify-between items-center m-4">
-                    <div class="job-title">
-                        {{$job->title}}
+                    <div class="job-title text-lg">
+                        <p>{{$job->title}}</p>
                     </div>
                     <div class="controls flex items-center gap-4">
                         {{-- Edit Button --}}
@@ -54,13 +54,30 @@
                         </div>
                     </div>
                 </div>
-            @empty
-                <p>No Jobs Found!</p>
-            @endforelse
+                @empty
+                    <p class="m-4">No Jobs Found!</p>
+                @endforelse
                 </div>
+
+            <div class="applicants-area">
+                @forelse ($job->applicants as $index => $applicant)
+                    <div class="applicant-info m-4 bg-gray-100 p-2 rounded">
+                        <h3><strong>Applicant</strong> Number {{$index+1}}</h3>
+                        <ul class="applicant-details-list">
+                            <li><strong>Name: </strong>{{ $applicant->full_name }}</li>
+                            <li><strong>Email: </strong>{{ $applicant->contact_email }}</li>
+                            <li><strong>Phone Number: </strong>{{ $applicant->contact_phone }}</li>
+                            <li><strong>Location: </strong>{{ $applicant->location }}</li>
+                            <li><a class="text-blue-500 hover:text-blue-600" href="{{ asset('storage/'. $applicant->resume_path) }}" download><i class="fa-solid fa-download"></i> Download</a></li>
+                        </ul>
+                    </div>
+                @empty  
+                    <p class="m-4 text-gray-500">No applicants found!</p>
+                @endforelse
             </div>
         </div>
     </section>
+
     {{-- Include Bottom Banner --}}
     <x-bottom-banner />
 </x-layout>
