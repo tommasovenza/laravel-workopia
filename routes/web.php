@@ -14,6 +14,7 @@ use App\Http\Controllers\BookmarkController;
 Route::get('/', [JobController::class, 'show_home'])->name('home');
 Route::get('/jobs/index', [JobController::class, 'index'])->name('index');
 Route::get('/jobs/{job}/show', [JobController::class, 'show'])->name('show');
+Route::get('/search', [JobController::class, 'search'])->name('search');
 
 // Auth Middleware
 Route::middleware('auth')->group(function () {

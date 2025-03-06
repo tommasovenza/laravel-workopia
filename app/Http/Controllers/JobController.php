@@ -168,4 +168,9 @@ class JobController extends Controller
 
         return view('layout.jobs.saved', compact('saved_jobs'));
     }
+
+    public function search()
+    {
+        return "string test";
+    }
 }
