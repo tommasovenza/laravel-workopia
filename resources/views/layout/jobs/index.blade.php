@@ -13,5 +13,5 @@
         @endforeach
     </div>
 
-   {{ $listings->links() }}
+   {{-- {{ $listings->links() }} --}}
 </x-layout>

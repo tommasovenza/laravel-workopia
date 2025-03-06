@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\View\View;
 
 class JobController extends Controller
 {
@@ -22,7 +24,8 @@ class JobController extends Controller
     // Indexing Jobs
     public function index()
     {
-        $listings = Job::paginate(6);
+        // $listings = Job::paginate(6);
+        $listings = Job::all();
         return view('layout.jobs.index', compact('listings'));
     }
 
@@ -169,8 +172,31 @@ class JobController extends Controller
         return view('layout.jobs.saved', compact('saved_jobs'));
     }
 
-    public function search()
+    public function search(Request $request): View
     {
-        return "string test";
+        $keywords = $request->input('keywords');
+        $location = $request->input('location');
+
+        if (!isset($keywords)) {
+            $keywords = 'nothing found';
+        }
+        if (!isset($location)) {
+            $location = 'nothing found';
+        }
+
+        // dd($keywords, $location);
+        $listings = DB::table('job_listings')
+            ->where('title', 'like', '%' . $keywords . '%')
+            ->orWhere('description', 'like', '%' . $keywords . '%')
+            ->orWhere('tags', 'like', '%' . $keywords . '%')
+            ->orWhere('address', 'like', '%' . $location . '%')
+            ->orWhere('zipcode', 'like', '%' . $location . '%')
+            ->orWhere('state', 'like', '%' . $location . '%')
+            ->orWhere('city', 'like', '%' . $location . '%')
+            ->get();
+
+        return view('layout.jobs.index', compact('listings'))
+            ->with('message', 'Jobs found')
+            ->with('type', 'success');
     }
 }
