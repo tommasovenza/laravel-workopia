@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\GeocodeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ApplicantController;
+use App\Http\Controllers\DashboardController;
 
 // Home Route
 Route::get('/', [JobController::class, 'show_home'])->name('home');
@@ -47,6 +48,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 // Job Application's Routes
 Route::post('/applicant-store/{job}', [ApplicantController::class, 'store'])->name('applicant.store')->middleware('auth');
 Route::delete('/applicant-delete/{applicant}', [ApplicantController::class, 'destroy'])->name('applicant.destroy')->middleware('auth');
+
+// Geocode Route
+Route::post('/geocode', [GeocodeController::class, 'geocode'])->name('geocode');
 
 // Test Route
 Route::get('/test', [TestController::class, 'test']);

@@ -72,7 +72,7 @@
                     and attach your resume.
                 </p>
 
-                <div x-data="{ open: false }" x-cloak>
+                <div x-data="{ open: false }" x-cloak class="modal-form" >
                     <button x-on:click="open = true" class="block w-full text-center px-5 py-2.5 shadow-sm rounded font-medium cursor-pointer text-indigo-700 bg-indigo-200 hover:bg-indigo-400 hover:text-white">
                         Apply Now
                     </button>
@@ -106,9 +106,9 @@
                 </div>
             </div>
 
-            {{-- <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-                <div id="map"></div>
-            </div> --}}
+            <div class="bg-white p-6 rounded-lg shadow-md mt-6">
+                <div id="map" class="map"></div>
+            </div>
         </section>
 
         <!-- Sidebar -->
@@ -150,4 +150,63 @@
             @endauth
         </aside>
     </div>
+
+<link
+  href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css"
+  rel="stylesheet"
+/>
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Your Mapbox access token
+    mapboxgl.accessToken = "{{ env('MAPBOX_API_KEY') }}";
+
+    // Initialize the map
+    const map = new mapboxgl.Map({
+      container: 'map', // ID of the container element
+      style: 'mapbox://styles/mapbox/streets-v11', // Map style
+      center: [-74.5, 40], // Default center
+      zoom: 9, // Default zoom level
+    });
+
+    // Get address from Laravel view
+    const city = '{{ $job->city }}';
+    const state = '{{ $job->state }}';
+    const address = city + ', ' + state;
+
+    const payload = {
+        address: address,
+    }
+
+    const settings = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": '{{ csrf_token() }}',
+            Accept: "application/json"
+        },
+    }
+
+    // Geocode the address
+    fetch('/geocode', settings)
+      .then((response) => response.json())
+      .then((data) => {
+          console.log(data);
+        if (data.features.length > 0) {
+            
+          const [longitude, latitude] = data.features[0].center;
+          
+          // Center the map and add a marker
+          map.setCenter([longitude, latitude]);
+          map.setZoom(14);
+
+          new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map);
+        } else {
+          console.error('No results found for the address.');
+        }
+      })
+      .catch((error) => console.error('Error geocoding address:', error));
+  });
+</script>
 </x-layout>
